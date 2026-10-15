@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Coast Glow | San Diego Spray Tanning</title>
+<meta name="description" content="Golden Coast Glow: private, home-based spray tanning in San Diego. Book an appointment today.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2343291B'/%3E%3Ccircle cx='50' cy='50' r='43' fill='none' stroke='%23F6ECD7' stroke-width='1.5'/%3E%3Ctext x='50' y='61' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='30' fill='%23D69A3C'%3EGCG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Yeseva+One&family=Yellowtail&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gcg-cream: #F6ECD7;
+    --gcg-peach: #EFC9A3;
+    --gcg-apricot: #E8975A;
+    --gcg-terracotta: #C0552E;
+    --gcg-terracotta-deep: #9c4424;
+    --gcg-sage: #9FAE86;
+    --gcg-sage-deep: #768563;
+    --gcg-seafoam: #5FA6A0;
+    --gcg-mustard: #D69A3C;
+    --gcg-ink: #43291B;
+    --gcg-radius: 16px;
+    --gcg-pill: 999px;
+    --gcg-border: 3px solid var(--gcg-ink);
+
+    --display: 'Bagel Fat One', cursive;
+    --serif: 'Yeseva One', serif;
+    --script: 'Yellowtail', cursive;
+    --sans: 'Jost', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--gcg-cream);
+    color: var(--gcg-ink);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  @keyframes gcgFloat { 0%,100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-12px) rotate(-7deg); } }
+  @keyframes gcgSpin { to { transform: rotate(360deg); } }
+  @keyframes gcgCheckerMove { to { background-position: 76px 0; } }
+  @keyframes gcgBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes gcgPop {
+    from { opacity: 0; transform: translateY(26px) scale(0.94) rotate(-1.2deg); }
+    to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+  }
+
+  /* ---------- KICKER ---------- */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--gcg-terracotta);
+    margin-bottom: 18px;
+  }
+  .kicker .line {
+    width: 0;
+    height: 2px;
+    background: var(--gcg-terracotta);
+    transition: width 0.6s ease 0.15s;
+  }
+  .fade-section.visible .kicker .line { width: 44px; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 14px 32px;
+    border-radius: var(--gcg-pill);
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
+  }
+  .btn-primary {
+    background: var(--gcg-terracotta);
+    color: var(--gcg-cream);
+    border: 2px solid var(--gcg-ink);
+  }
+  .btn-primary:hover { transform: scale(1.06) rotate(-1.5deg); box-shadow: 4px 5px 0 var(--gcg-ink); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--gcg-ink);
+    border: 2px solid var(--gcg-ink);
+  }
+  .btn-ghost:hover { transform: scale(1.06) rotate(1.5deg); background: var(--gcg-ink); color: var(--gcg-cream); }
+  .btn-on-dark { border-color: var(--gcg-cream); }
+  .btn-primary.btn-on-dark { background: var(--gcg-cream); color: var(--gcg-terracotta); }
+  .btn-ghost.btn-on-dark { color: var(--gcg-cream); }
+  .btn-ghost.btn-on-dark:hover { background: var(--gcg-cream); color: var(--gcg-ink); }
+
+  /* ---------- PILL TAGS ---------- */
+  .pill-tag {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    padding: 9px 20px;
+    border-radius: var(--gcg-pill);
+    color: var(--gcg-cream);
+    animation: gcgBob 3.2s ease-in-out infinite;
+  }
+
+  /* ---------- SEAL ---------- */
+  .seal { animation: gcgFloat 6s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(67,41,27,0.35)); }
+
+  /* ---------- DIVIDERS ---------- */
+  .divider { width: 100%; overflow: hidden; }
+  .divider-checker {
+    height: 30px;
+    background: repeating-conic-gradient(var(--gcg-terracotta) 0% 25%, var(--gcg-cream) 0% 50%) 0 0 / 38px 38px;
+    box-shadow: inset 0 0 0 3px var(--gcg-ink);
+    animation: gcgCheckerMove 6s linear infinite;
+  }
+  .divider-scallop {
+    height: 46px;
+    background: var(--gcg-seafoam);
+    position: relative;
+  }
+  .divider-scallop::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle 23px at 23px 0, var(--gcg-cream) 22px, transparent 23px) 0 0 / 46px 46px repeat-x;
+  }
+  .divider-stripes {
+    height: 30px;
+    background: repeating-linear-gradient(115deg, var(--gcg-mustard) 0 22px, var(--gcg-seafoam) 22px 44px, var(--gcg-terracotta) 44px 66px, var(--gcg-sage) 66px 88px);
+    box-shadow: inset 0 0 0 3px var(--gcg-ink);
+  }
+  .divider-dash {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gcg-cream);
+  }
+  .divider-snake {
+    position: relative;
+    height: 110px;
+    background: linear-gradient(to bottom, var(--gcg-cream) 50%, var(--gcg-ink) 50%);
+    overflow: hidden;
+  }
+  .divider-snake svg { width: 100%; height: 100%; display: block; }
+  .divider-snake .snake-a { stroke-dasharray: 26 26; stroke-dashoffset: 0; animation: gcgSnakeA 5s linear infinite; }
+  .divider-snake .snake-b { stroke-dasharray: 26 26; stroke-dashoffset: 26; animation: gcgSnakeB 5s linear infinite; }
+  @keyframes gcgSnakeA { to { stroke-dashoffset: -52; } }
+  @keyframes gcgSnakeB { to { stroke-dashoffset: -26; } }
+  .divider-dash .line { flex: 1; max-width: 460px; height: 0; border-top: 2px dashed var(--gcg-terracotta); }
+  .divider-dash .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gcg-mustard); margin: 0 16px; animation: gcgBob 2.4s ease-in-out infinite; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--gcg-cream);
+    border-bottom: 2px dashed var(--gcg-terracotta);
+  }
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    padding: 16px 24px;
+  }
+  .nav-brand { font-family: var(--display); font-size: 1.6rem; color: var(--gcg-terracotta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-links a:not(.btn) { transition: color 0.2s ease; }
+  .nav-links a:not(.btn):hover { color: var(--gcg-terracotta); }
+  .nav-links .btn { padding: 10px 24px; font-size: 0.8rem; }
+
+  /* ---------- HERO ---------- */
+  .hero { display: flex; min-height: 640px; }
+  .hero-left {
+    flex: 1.1;
+    background: var(--gcg-cream);
+    padding: 64px 50px 64px 6vw;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-script { font-family: var(--script); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--gcg-sage-deep); line-height: 0.8; margin-left: 4px; }
+  .hero-headline {
+    font-family: var(--display);
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 0.95;
+    color: var(--gcg-terracotta);
+    margin: 4px 0 22px;
+  }
+  .hero-headline .glow { color: var(--gcg-mustard); }
+  .hero-sub { font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--gcg-ink); opacity: 0.85; max-width: 460px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-right {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: var(--gcg-sage);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-right::before {
+    content: "";
+    position: absolute;
+    top: -75%; left: -75%;
+    width: 250%; height: 250%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, var(--gcg-apricot) 0 7deg, transparent 7deg 14deg);
+    opacity: 0.45;
+    animation: gcgSpin 50s linear infinite;
+  }
+  .hero-photo {
+    position: relative;
+    width: 78%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 22% center;
+    border-radius: 14px;
+    border: 7px solid var(--gcg-cream);
+    box-shadow: 0 26px 50px rgba(28,20,16,0.4);
+    transform: rotate(-3deg);
+  }
+  .hero-seal { position: absolute; left: 5%; bottom: 7%; width: 150px; height: 150px; z-index: 2; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section { padding: 90px 0; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 50px; flex-wrap: wrap; }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.05; margin: 0; }
+  .section-sub { font-size: 1.05rem; max-width: 420px; opacity: 0.85; margin: 0; }
+
+  /* ---------- SERVICES ---------- */
+  .services { background: var(--gcg-peach); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .price-card {
+    position: relative;
+    display: flex; flex-direction: column;
+    background: var(--gcg-cream);
+    border: var(--gcg-border);
+    border-radius: var(--gcg-radius);
+    padding: 34px 28px;
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(.34,1.2,.64,1), box-shadow 0.3s ease;
+  }
+  .price-card:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 8px 10px 0 rgba(67,41,27,0.18); }
+  .price-card.featured { border-color: var(--gcg-terracotta); border-width: 4px; }
+  .price-card .badge-slot { display: flex; align-items: center; justify-content: center; min-height: 30px; margin-bottom: 12px; }
+  .price-card .badge { background: var(--gcg-sage); }
+  .price-card h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--gcg-terracotta-deep); margin-bottom: 8px; }
+  .price-card .price { font-family: var(--display); font-size: 2.3rem; color: var(--gcg-terracotta); margin: 10px 0; }
+  .price-card .price span { font-family: var(--sans); font-size: 0.95rem; font-weight: 400; color: var(--gcg-ink); opacity: 0.7; }
+  .price-card p.desc { font-size: 0.95rem; margin-bottom: 8px; opacity: 0.85; }
+  .price-card ul { flex-grow: 1; list-style: none; text-align: left; margin: 16px 0; font-size: 0.92rem; }
+  .price-card ul li { position: relative; padding: 7px 0 7px 22px; border-bottom: 1px dashed rgba(67,41,27,0.2); }
+  .price-card ul li::before { content: ""; position: absolute; left: 0; top: 15px; width: 8px; height: 8px; background: var(--gcg-terracotta); transform: rotate(45deg); }
+  .price-card .btn { margin-top: 6px; }
+
+  /* ---------- ABOUT ---------- */
+  .about { background: var(--gcg-cream); }
+  .about-content { display: flex; align-items: center; gap: 60px; }
+  .about-text { flex: 1.1; }
+  .about-pills { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0 6px; }
+  .about-pills .pill-tag:nth-child(1) { background: var(--gcg-terracotta); animation-delay: 0s; }
+  .about-pills .pill-tag:nth-child(2) { background: var(--gcg-sage-deep); animation-delay: 0.3s; }
+  .about-pills .pill-tag:nth-child(3) { background: var(--gcg-seafoam); animation-delay: 0.6s; }
+  .about-script { font-family: var(--script); font-size: 1.8rem; color: var(--gcg-terracotta); margin-top: 18px; }
+  .about-visual { flex: 0 0 320px; position: relative; height: 420px; }
+  .about-photo {
+    position: absolute;
+    width: 220px; height: 270px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 6px solid var(--gcg-cream);
+    box-shadow: 0 18px 32px rgba(67,41,27,0.3);
+  }
+  .about-photo.one { top: 0; left: 0; transform: rotate(-5deg); z-index: 2; }
+  .about-photo.two { top: 90px; left: 110px; width: 190px; height: 230px; transform: rotate(6deg); z-index: 1; }
+  .about-seal { position: absolute; right: -6px; bottom: -6px; width: 120px; height: 120px; z-index: 3; }
+
+  /* ---------- COMPARISON ---------- */
+  .comparison { background: var(--gcg-sage); color: var(--gcg-cream); }
+  .comparison .kicker { color: var(--gcg-cream); }
+  .comparison .kicker .line { background: var(--gcg-cream); }
+  .comparison .section-sub { color: var(--gcg-cream); opacity: 0.92; }
+  .compare-table-wrap { width: 100%; max-width: 100%; overflow-x: auto; border-radius: var(--gcg-radius); border: var(--gcg-border); }
+  .compare-table { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--gcg-cream); color: var(--gcg-ink); }
+  .compare-table th, .compare-table td { padding: 16px 12px; text-align: center; border-bottom: 2px solid rgba(67,41,27,0.12); }
+  .compare-table thead th { background: var(--gcg-peach); font-family: var(--serif); font-weight: 400; font-size: 0.9rem; vertical-align: bottom; }
+  .compare-table thead th.row-label { background: transparent; border-bottom: none; }
+  .compare-table thead th.winner { background: var(--gcg-terracotta); color: var(--gcg-cream); }
+  .th-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .compare-icon svg { width: 26px; height: 26px; stroke: var(--gcg-ink); }
+  .compare-table thead th.winner .compare-icon svg { stroke: var(--gcg-cream); }
+  .compare-table tbody td.row-label { text-align: left; font-weight: 600; font-size: 0.92rem; }
+  .compare-table tbody td.winner { background: rgba(192, 85, 46, 0.1); border-left: 2px solid var(--gcg-terracotta); border-right: 2px solid var(--gcg-terracotta); }
+  .compare-table thead th.winner { border-left: 2px solid var(--gcg-terracotta); border-right: 2px solid var(--gcg-terracotta); }
+  .compare-table tbody tr:last-child td.winner { border-bottom: 2px solid var(--gcg-terracotta); }
+  .compare-table td.check, .compare-table td.x { position: relative; }
+  .compare-table td.check::before {
+    content: ""; position: absolute; top: 46%; left: 50%; width: 7px; height: 13px;
+    border-right: 2px solid var(--gcg-seafoam); border-bottom: 2px solid var(--gcg-seafoam);
+    transform: translate(-50%, -60%) rotate(40deg);
+  }
+  .compare-table td.winner.check::before { border-color: var(--gcg-terracotta); }
+  .compare-table td.x::before, .compare-table td.x::after {
+    content: ""; position: absolute; top: 50%; left: 50%; width: 13px; height: 2px; background: rgba(67,41,27,0.45);
+  }
+  .compare-table td.x::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .compare-table td.x::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+  /* ---------- BOOKING CTA ---------- */
+  .booking { position: relative; background: var(--gcg-seafoam); color: var(--gcg-cream); text-align: center; overflow: hidden; padding-bottom: 0; }
+  .booking-inner { position: relative; z-index: 2; padding: 90px 24px 56px; }
+  .booking-seal { width: 130px; height: 130px; margin: 0 auto 22px; }
+  .booking-script { font-family: var(--script); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--gcg-peach); line-height: 0.8; }
+  .booking p.sub { font-size: 1.1rem; max-width: 480px; margin: 26px auto 34px; color: var(--gcg-peach); }
+  .booking-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
+
+  /* ---------- SPRAY TAN INTERACTION ---------- */
+  .spray-wrap { position: relative; display: inline-block; margin: 6px 0 0; }
+  .spray-hitzone { position: relative; display: inline-block; padding: 80px 100px; cursor: none; touch-action: none; }
+  .spray-stage { position: relative; display: inline-block; }
+  .spray-stage .booking-headline {
+    font-family: var(--display);
+    font-size: clamp(5rem, 17vw, 13rem);
+    line-height: 0.95;
+    margin: 0;
+    color: var(--gcg-apricot);
+    user-select: none;
+  }
+  .spray-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    pointer-events: none;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  }
+  .spray-stage .booking-headline.spray-overlay { color: var(--gcg-peach); }
+  .spray-canvas { position: absolute; left: -99999px; top: -99999px; visibility: hidden; }
+  .spray-hint {
+    position: absolute;
+    top: 58px; right: 94px;
+    background: var(--gcg-ink);
+    color: var(--gcg-cream);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    padding: 8px 16px;
+    border-radius: var(--gcg-pill);
+    border: 2px solid var(--gcg-cream);
+    transform: rotate(-6deg);
+    white-space: nowrap;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .spray-hint.hint-hide { opacity: 0; transform: rotate(-6deg) translateY(-10px); }
+  .spray-gun {
+    position: fixed;
+    top: 0; left: 0;
+    width: 150px;
+    height: auto;
+    transform: translate(-90.7%, -25.1%) rotate(-4deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 200;
+    filter: drop-shadow(0 8px 14px rgba(28,20,16,0.35));
+  }
+  .mist-particle {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: radial-gradient(circle, rgba(246,236,215,0.95), rgba(246,236,215,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 199;
+    transform: translate(-50%, -50%);
+    animation: gcgMistOut 0.55s ease-out forwards;
+  }
+  @keyframes gcgMistOut {
+    0% { opacity: 0.85; transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
+    100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(1.6); }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--gcg-cream); text-align: center; }
+  .contact .section-head { justify-content: center; text-align: center; flex-direction: column; align-items: center; }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .contact-card { background: var(--gcg-peach); border: var(--gcg-border); border-radius: var(--gcg-radius); padding: 30px 22px; transition: transform 0.3s ease; }
+  .contact-card:hover { transform: translateY(-5px) rotate(1deg); }
+  .contact-card .icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 50px; height: 50px; margin: 0 auto 14px;
+    border-radius: 50%; background: var(--gcg-cream); border: 2px solid var(--gcg-ink);
+  }
+  .contact-card .icon svg { width: 22px; height: 22px; stroke: var(--gcg-terracotta); }
+  .contact-card h4 { font-family: var(--serif); font-size: 1.1rem; color: var(--gcg-terracotta-deep); margin-bottom: 8px; font-weight: 400; }
+  .contact-card a, .contact-card p { font-size: 0.95rem; }
+  .contact-card a:hover { color: var(--gcg-terracotta); }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: var(--gcg-ink); color: var(--gcg-cream); text-align: center; padding: 50px 24px 36px; }
+  .footer-seal { width: 86px; height: 86px; margin: 0 auto 18px; }
+  footer .footer-script { font-family: var(--script); font-size: 2rem; color: var(--gcg-peach); display: inline-flex; align-items: center; gap: 10px; }
+  footer .footer-script svg { width: 22px; height: 22px; }
+  footer p.fine { font-size: 0.82rem; opacity: 0.7; margin-top: 16px; }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .fade-section { opacity: 0; transform: translateY(26px) scale(0.96); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.22,1,.36,1); }
+  .fade-section.visible { opacity: 1; transform: translateY(0) scale(1); }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-section, .seal, .pill-tag, .hero-right::before, .divider-checker, .snake-a, .snake-b { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; min-height: auto; }
+    .hero-left { padding: 56px 28px 40px; }
+    .hero-right { padding: 50px 28px; min-height: 360px; }
+    .hero-photo { width: 70%; }
+    .about-content { flex-direction: column; }
+    .about-visual { width: 100%; height: 320px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .spray-hitzone { padding: 50px 50px; }
+    .spray-hint { top: 28px; right: 44px; }
+  }
+  @media (max-width: 620px) {
+    .nav-links a:not(.btn) { display: none; }
+    .nav-brand { font-size: 1.2rem; }
+    .nav-links .btn { padding: 8px 18px; font-size: 0.72rem; }
+    section { padding: 64px 0; }
+    .booking-inner { padding: 70px 20px 44px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { text-align: center; }
+    .booking-actions { flex-direction: column; align-items: stretch; }
+    .spray-hitzone { padding: 32px 24px; }
+    .spray-hint { top: 12px; right: 18px; font-size: 0.7rem; padding: 6px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Golden Coast Glow</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#about">Studio</a>
+      <a href="#contact">Contact</a>
+      <a href="https://calendly.com/goldencoastglow" class="btn btn-primary" target="_blank" rel="noopener">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-left">
+    <div class="hero-script">the</div>
+    <h1 class="hero-headline">GOLDEN<br>COAST<br><span class="glow">GLOW</span></h1>
+    <p class="hero-sub">Private, by-appointment spray tanning in San Diego. Sun-kissed color, no UV, no rush. Just that effortless coastal glow.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/goldencoastglow" class="btn btn-primary" target="_blank" rel="noopener">Book a Session</a>
+      <a href="#about" class="btn btn-ghost">See the Glow</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-photo" src="images/surf-postcard.jpg" alt="Vintage surf postcard photo at the beach">
+    <svg class="hero-seal seal" viewBox="0 0 200 200">
+      <defs><path id="sealPath1" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"></path></defs>
+      <circle cx="100" cy="100" r="96" fill="#43291B"></circle>
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#F6ECD7" stroke-width="2"></circle>
+      <text fill="#F6ECD7" font-family="Jost,sans-serif" font-size="15" font-weight="600" letter-spacing="3"><textPath href="#sealPath1" startOffset="0">GOLDEN COAST GLOW   PRIVATE TANNING   </textPath></text>
+      <text x="100" y="92" text-anchor="middle" fill="#D69A3C" font-family="'Bagel Fat One',cursive" font-size="40">GCG</text>
+      <text x="100" y="124" text-anchor="middle" fill="#F6ECD7" font-family="'Yeseva One',serif" font-size="20">EST 2026</text>
+    </svg>
+  </div>
+</header>
+
+<div class="divider divider-checker"></div>
+
+<section id="services" class="services fade-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="line"></span>Services &amp; Pricing</div>
+        <h2 class="section-title">A golden glow,<br>made personal.</h2>
+      </div>
+      <p class="section-sub">Custom sunless tanning sessions in a private San Diego studio. Every appointment includes consultation, color matching, and aftercare guidance.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="badge-slot"></div>
+        <h3>Essential Tan</h3>
+        <p class="desc">A natural, lightweight tan for everyday wear.</p>
+        <div class="price">$45<span>/session</span></div>
+        <ul>
+          <li>Full-body custom spray tan</li>
+          <li>Light to medium shade</li>
+          <li>1-hour dry time</li>
+          <li>Aftercare lotion sample</li>
+        </ul>
+        <a href="https://calendly.com/goldencoastglow" class="btn btn-primary" target="_blank" rel="noopener">Book This</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="badge-slot"><span class="badge pill-tag">Most Popular</span></div>
+        <h3>Signature Tan</h3>
+        <p class="desc">A deeper, longer-lasting tan for special occasions.</p>
+        <div class="price">$65<span>/session</span></div>
+        <ul>
+          <li>Full-body custom spray tan</li>
+          <li>Medium to dark shade</li>
+          <li>Exfoliation prep included</li>
+          <li>Full-size aftercare lotion</li>
+        </ul>
+        <a href="https://calendly.com/goldencoastglow" class="btn btn-primary" target="_blank" rel="noopener">Book This</a>
+      </div>
+
+      <div class="price-card">
+        <div class="badge-slot"></div>
+        <h3>Membership</h3>
+        <p class="desc">Three sessions per month, billed monthly.</p>
+        <div class="price">$150<span>/month</span></div>
+        <ul>
+          <li>3 spray tan sessions monthly</li>
+          <li>Custom shade, every visit</li>
+          <li>Priority booking slots</li>
+          <li>10% off retail products</li>
+        </ul>
+        <a href="https://calendly.com/goldencoastglow" class="btn btn-primary" target="_blank" rel="noopener">Book This</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider divider-scallop"></div>
+
+<section id="about" class="about fade-section">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <div class="kicker"><span class="line"></span>The Studio</div>
+        <h2 class="section-title">Sun-kissed,<br>naturally.</h2>
+        <p style="margin-top:18px; opacity:0.85;">Golden Coast Glow is a private, in-home spray tanning studio in San Diego, using modern, skin-safe formulas to deliver a natural, even tan without UV exposure.</p>
+        <p style="margin-top:14px; opacity:0.85;">Each session takes place in a relaxed, private setting with color matching tailored to your skin tone, for a natural finish that fades evenly and lasts up to ten days.</p>
+        <div class="about-pills">
+          <span class="pill-tag">Sun-kissed</span>
+          <span class="pill-tag">Effortless</span>
+          <span class="pill-tag">Golden</span>
+        </div>
+        <div class="about-script">always golden hour</div>
+      </div>
+      <div class="about-visual">
+        <img class="about-photo one" src="images/booking-bg.jpg" alt="Golden umbrella against blue sky">
+        <img class="about-photo two" src="images/compare-bg.jpg" alt="Sage umbrella on the beach">
+        <svg class="about-seal seal" viewBox="0 0 200 200" style="animation-delay:-2s;">
+          <defs><path id="sealPath2" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"></path></defs>
+          <circle cx="100" cy="100" r="96" fill="#C0552E"></circle>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#F6ECD7" stroke-width="2"></circle>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="#F6ECD7" stroke-width="1.4" stroke-dasharray="2 5"></circle>
+          <text fill="#F6ECD7" font-family="Jost,sans-serif" font-size="14" font-weight="600" letter-spacing="2.6"><textPath href="#sealPath2" startOffset="0">GOLDEN COAST GLOW   PRIVATE TANNING   </textPath></text>
+          <text x="100" y="92" text-anchor="middle" fill="#F6ECD7" font-family="'Bagel Fat One',cursive" font-size="38">GCG</text>
+          <text x="100" y="122" text-anchor="middle" fill="#43291B" font-family="Jost,sans-serif" font-weight="600" font-size="12" letter-spacing="2">EST 2026</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider divider-stripes"></div>
+
+<section class="comparison fade-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="line"></span>How We Compare</div>
+        <h2 class="section-title">Why Golden Coast<br>Glow wins.</h2>
+      </div>
+      <p class="section-sub">A look at the common tradeoffs with other tanning methods, and why we're built to avoid them.</p>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="row-label"></th>
+            <th>
+              <div class="th-inner">
+                <span class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1"/></svg></span>
+                Sun Tanning
+              </div>
+            </th>
+            <th>
+              <div class="th-inner">
+                <span class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v3l2 2v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V7l2-2V2z"/><path d="M8 11h8"/></svg></span>
+                At-Home Self-Tanner
+              </div>
+            </th>
+            <th>
+              <div class="th-inner">
+                <span class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 9v10h14V9"/></svg></span>
+                Generic Spray Tan Studios
+              </div>
+            </th>
+            <th class="winner">
+              <div class="th-inner">
+                <span class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span>
+                Golden Coast Glow
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">No UV skin damage</td>
+            <td class="x"></td>
+            <td class="check"></td>
+            <td class="check"></td>
+            <td class="winner check"></td>
+          </tr>
+          <tr>
+            <td class="row-label">Custom-matched shade</td>
+            <td class="x"></td>
+            <td class="x"></td>
+            <td class="x"></td>
+            <td class="winner check"></td>
+          </tr>
+          <tr>
+            <td class="row-label">Professionally applied</td>
+            <td class="x"></td>
+            <td class="x"></td>
+            <td class="check"></td>
+            <td class="winner check"></td>
+          </tr>
+          <tr>
+            <td class="row-label">Private, unhurried session</td>
+            <td class="x"></td>
+            <td class="check"></td>
+            <td class="x"></td>
+            <td class="winner check"></td>
+          </tr>
+          <tr>
+            <td class="row-label">Streak-free, even results</td>
+            <td class="x"></td>
+            <td class="x"></td>
+            <td class="check"></td>
+            <td class="winner check"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider-dash"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+<section class="booking fade-section">
+  <div class="booking-inner">
+    <svg class="booking-seal seal" viewBox="0 0 200 200">
+      <defs><path id="sealPath3" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"></path></defs>
+      <circle cx="100" cy="100" r="96" fill="#43291B"></circle>
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#F6ECD7" stroke-width="2"></circle>
+      <text fill="#F6ECD7" font-family="Jost,sans-serif" font-size="15" font-weight="600" letter-spacing="3"><textPath href="#sealPath3" startOffset="0">GOLDEN COAST GLOW   EST 2026   </textPath></text>
+      <text x="100" y="115" text-anchor="middle" fill="#D69A3C" font-family="'Bagel Fat One',cursive" font-size="46">GCG</text>
+    </svg>
+    <div class="booking-script">let's get</div>
+    <div class="spray-wrap">
+      <div class="spray-hitzone" id="sprayHitzone">
+        <div class="spray-hint" id="sprayHint">Click &amp; hold to tan</div>
+        <div class="spray-stage" id="sprayStage">
+          <h2 class="booking-headline" id="sprayWord">GOLDEN</h2>
+          <h2 class="booking-headline spray-overlay" id="sprayOverlay" aria-hidden="true">GOLDEN</h2>
+          <canvas class="spray-canvas" id="sprayCanvas" aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+    <p class="sub">Booking takes less than a minute. Choose a time that works for you, and we'll handle the rest.</p>
+    <div class="booking-actions">
+      <a href="https://calendly.com/goldencoastglow" class="btn btn-primary btn-on-dark" target="_blank" rel="noopener">Book a Session</a>
+      <a href="#contact" class="btn btn-ghost btn-on-dark">Ask a Question</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact fade-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker"><span class="line"></span>Get In Touch</div>
+      <h2 class="section-title">Questions before<br>you book?</h2>
+      <p class="section-sub">Reach out about a session, a custom appointment time, or anything else.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
+        <h4>Location</h4>
+        <p>Home Studio<br>San Diego, CA</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <h4>Email</h4>
+        <a href="mailto:hello@goldencoastglow.com">hello@goldencoastglow.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
+        <h4>Book Online</h4>
+        <a href="https://calendly.com/goldencoastglow" target="_blank" rel="noopener">calendly.com/goldencoastglow</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-snake">
+  <svg viewBox="0 0 1200 110" preserveAspectRatio="none">
+    <path d="M-20,55 C 80,15 160,95 260,55 C 360,15 440,95 540,55 C 640,15 720,95 820,55 C 920,15 1000,95 1100,55 C 1160,35 1180,75 1220,55"
+          fill="none" stroke="#43291B" stroke-width="58" stroke-linecap="round"/>
+    <path class="snake-a" d="M-20,55 C 80,15 160,95 260,55 C 360,15 440,95 540,55 C 640,15 720,95 820,55 C 920,15 1000,95 1100,55 C 1160,35 1180,75 1220,55"
+          fill="none" stroke="#C0552E" stroke-width="50"/>
+    <path class="snake-b" d="M-20,55 C 80,15 160,95 260,55 C 360,15 440,95 540,55 C 640,15 720,95 820,55 C 920,15 1000,95 1100,55 C 1160,35 1180,75 1220,55"
+          fill="none" stroke="#F6ECD7" stroke-width="50"/>
+  </svg>
+</div>
+
+<footer>
+  <svg class="footer-seal seal" viewBox="0 0 200 200">
+    <defs><path id="sealPath4" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"></path></defs>
+    <circle cx="100" cy="100" r="96" fill="#D69A3C"></circle>
+    <circle cx="100" cy="100" r="90" fill="none" stroke="#43291B" stroke-width="2"></circle>
+    <text fill="#43291B" font-family="Jost,sans-serif" font-size="14" font-weight="600" letter-spacing="2.6"><textPath href="#sealPath4" startOffset="0">GOLDEN COAST GLOW   EST 2026   </textPath></text>
+    <text x="100" y="118" text-anchor="middle" fill="#43291B" font-family="'Bagel Fat One',cursive" font-size="38">GCG</text>
+  </svg>
+  <div class="footer-script">
+    stay golden
+    <svg viewBox="0 0 24 24" fill="none" stroke="#EFC9A3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1"/></svg>
+  </div>
+  <p class="fine">&copy; 2026 Golden Coast Glow &middot; San Diego, CA &middot; Private Tanning Co.</p>
+</footer>
+
+<svg class="spray-gun" id="sprayGun" viewBox="100 40 165 105" aria-hidden="true">
+  <rect x="117" y="58" width="32" height="70" rx="13" fill="var(--gcg-terracotta)" stroke="var(--gcg-ink)" stroke-width="4" transform="rotate(8 133 93)"/>
+  <path d="M150,88 L173,88 L169,131 C169,139 154,139 154,131 Z" fill="var(--gcg-cream)" stroke="var(--gcg-ink)" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="152" y="111" width="19" height="17" fill="var(--gcg-apricot)"/>
+  <rect x="120" y="52" width="112" height="38" rx="15" fill="var(--gcg-terracotta)" stroke="var(--gcg-ink)" stroke-width="4"/>
+  <rect x="210" y="48" width="9" height="46" fill="var(--gcg-ink)"/>
+  <path d="M219,55 L250,64 L250,79 L219,88 Z" fill="var(--gcg-mustard)" stroke="var(--gcg-ink)" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="252" cy="71.5" r="5" fill="var(--gcg-ink)"/>
+</svg>
+
+<script>
+  var sections = document.querySelectorAll('.fade-section');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(function (el) { observer.observe(el); });
+  } else {
+    sections.forEach(function (el) { el.classList.add('visible'); });
+  }
+</script>
+
+<script>
+  (function () {
+    var stage = document.getElementById('sprayStage');
+    var hitzone = document.getElementById('sprayHitzone');
+    var overlay = document.getElementById('sprayOverlay');
+    var canvas = document.getElementById('sprayCanvas');
+    var gun = document.getElementById('sprayGun');
+    var hint = document.getElementById('sprayHint');
+    if (!stage || !hitzone || !overlay || !canvas || !gun || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    var drawing = false;
+    var lastX = null, lastY = null;
+    var hintVisible = true;
+    var maskUpdateQueued = false;
+
+    function fillMaskSolid() {
+      ctx.save();
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+    }
+
+    function sizeCanvas() {
+      var w = stage.clientWidth, h = stage.clientHeight;
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+      fillMaskSolid();
+      updateMaskNow();
+    }
+
+    function localPoint(clientX, clientY) {
+      var r = stage.getBoundingClientRect();
+      var sx = canvas.width / r.width;
+      var sy = canvas.height / r.height;
+      return { x: (clientX - r.left) * sx, y: (clientY - r.top) * sy };
+    }
+
+    function sprayDab(x, y) {
+      var scale = canvas.width / stage.clientWidth;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      for (var i = 0; i < 9; i++) {
+        var ang = Math.random() * Math.PI * 2;
+        var dist = Math.random() * 24 * scale;
+        var r = (4 + Math.random() * 7) * scale;
+        ctx.beginPath();
+        ctx.arc(x + Math.cos(ang) * dist, y + Math.sin(ang) * dist, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+      queueMaskUpdate();
+    }
+
+    function sprayLine(x0, y0, x1, y1) {
+      var dist = Math.hypot(x1 - x0, y1 - y0);
+      var step = 7 * (canvas.width / stage.clientWidth);
+      var steps = Math.max(1, Math.floor(dist / step));
+      for (var i = 0; i <= steps; i++) {
+        var t = i / steps;
+        sprayDab(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t);
+      }
+    }
+
+    function updateMaskNow() {
+      var url = canvas.toDataURL();
+      overlay.style.webkitMaskImage = 'url(' + url + ')';
+      overlay.style.maskImage = 'url(' + url + ')';
+    }
+
+    function queueMaskUpdate() {
+      if (maskUpdateQueued) return;
+      maskUpdateQueued = true;
+      requestAnimationFrame(function () {
+        maskUpdateQueued = false;
+        updateMaskNow();
+      });
+    }
+
+    function moveGun(clientX, clientY) {
+      gun.style.left = clientX + 'px';
+      gun.style.top = clientY + 'px';
+    }
+
+    function hideHint() {
+      if (!hintVisible) return;
+      hintVisible = false;
+      hint.classList.add('hint-hide');
+    }
+
+    // ---- mist particles ----
+    var lastMistTime = 0;
+    function spawnMist(x, y) {
+      var now = performance.now();
+      if (now - lastMistTime < 35) return;
+      lastMistTime = now;
+      var p = document.createElement('div');
+      p.className = 'mist-particle';
+      var ang = (Math.random() - 0.5) * 0.7;
+      var dist = 24 + Math.random() * 20;
+      var dx = Math.cos(ang) * dist;
+      var dy = Math.sin(ang) * dist * 0.6;
+      p.style.left = x + 'px';
+      p.style.top = y + 'px';
+      p.style.setProperty('--dx', dx + 'px');
+      p.style.setProperty('--dy', dy + 'px');
+      document.body.appendChild(p);
+      p.addEventListener('animationend', function () { p.remove(); });
+    }
+
+    hitzone.addEventListener('pointerenter', function (e) {
+      gun.style.opacity = '1';
+      moveGun(e.clientX, e.clientY);
+    });
+    hitzone.addEventListener('pointerleave', function () {
+      gun.style.opacity = '0';
+      drawing = false;
+      lastX = lastY = null;
+    });
+    hitzone.addEventListener('pointerdown', function (e) {
+      drawing = true;
+      hideHint();
+      var p = localPoint(e.clientX, e.clientY);
+      sprayDab(p.x, p.y);
+      spawnMist(e.clientX, e.clientY);
+      lastX = p.x; lastY = p.y;
+      e.preventDefault();
+    });
+    window.addEventListener('pointerup', function () {
+      drawing = false;
+      lastX = lastY = null;
+    });
+    hitzone.addEventListener('pointermove', function (e) {
+      moveGun(e.clientX, e.clientY);
+      if (!drawing) return;
+      spawnMist(e.clientX, e.clientY);
+      var p = localPoint(e.clientX, e.clientY);
+      if (lastX !== null) sprayLine(lastX, lastY, p.x, p.y);
+      else sprayDab(p.x, p.y);
+      lastX = p.x; lastY = p.y;
+    });
+
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    fontsReady.then(sizeCanvas);
+    window.addEventListener('load', sizeCanvas);
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(sizeCanvas, 150);
+    });
+  })();
+</script>
+
+</body>
+</html>
